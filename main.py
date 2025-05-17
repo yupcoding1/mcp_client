@@ -15,8 +15,8 @@ from mcp.client.stdio import stdio_client
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s",
-    # filename="app.log",  # Log to file instead of terminal
-    # filemode="a"         # Append mode (default)
+    filename="app.log",  # Log to file instead of terminal
+    filemode="a"         # Append mode (default)
 )
 
 
@@ -104,7 +104,8 @@ class Server:
             await session.initialize()
             self.session = session
         except Exception as e:
-            logging.error(f"Error initializing server {self.name}: {e}")
+            import traceback
+            logging.error(f"Error initializing server {self.name}: {e}\n{traceback.format_exc()}")
             await self.cleanup()
             raise
 
